@@ -33,6 +33,7 @@ def transform(z, r1, r2):
     annulus = np.where((np.abs(z) < r2) & (np.abs(z) > r1), np.log(z / r1), 0)
     annulus *= beta
 
+    # h_disp = np.log(r2 / r1) - 1j * np.sin(alpha) * np.log(r2 / r1)
     h_disp = np.log(r2 / r1) - (np.tan(alpha) * np.log(
         r2 / r1) * np.sin(alpha)) + (1j * np.sin(alpha) * np.log(r2 / r1))
     v_disp = -2j * np.pi
@@ -41,6 +42,7 @@ def transform(z, r1, r2):
         annulus,
         annulus + h_disp,
         annulus + 2 * h_disp,
+        annulus + 3 * h_disp,
     ))
     # annulus = np.concatenate((annulus, annulus + v_disp))
 
