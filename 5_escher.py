@@ -13,8 +13,8 @@ def escher(img_path):
     xx, yy = np.meshgrid(x, y)
     z = xx + yy * 1j
 
-    r1 = 0.5
-    r2 = 1
+    r1 = 0.2
+    r2 = 0.8
 
     zt = transform(z, r1, r2)
     new_img = change_coords(img, zt)
@@ -24,19 +24,20 @@ def escher(img_path):
 
 
 def transform(z, r1, r2):
-    alpha = np.arctan(np.log(r2/r1) / (2 * np.pi))
+    alpha = np.arctan(np.log(r2 / r1) / (2 * np.pi))
     f = np.cos(alpha)
     beta = f * np.exp(1j * alpha)
 
-    annulus = np.where((np.abs(z) < r2) & (np.abs(z) > r1), np.log(z/r1), 0)
-    # annulus = z
-    # annulus = np.log(annulus/r1)
-    # annulus *= beta
-    # annulus = np.exp(annulus)
+    annulus = np.where((np.abs(z) < r2) & (np.abs(z) > r1), np.log(z / r1), 0)
+    annulus *= beta
 
-    x_disp = np.log(r2/r1)
-    # nulus = np.concatenate((annulus, annulus + x_disp))
-    
+    h_disp = np.log(r2 / r1) + np.sin(alpha) * np.log(r2 / r1) * 1j
+    v_disp = -2j * np.pi
+    annulus = np.concatenate((annulus, annulus + h_disp, annulus + 2 * h_disp))
+    annulus = np.concatenate((annulus, annulus + v_disp))
+
+    annulus = np.exp(annulus)
+
     # plt.gca().set_aspect("equal")
     # plt.scatter(annulus.real.flatten(), annulus.imag.flatten())
     # plt.show()
@@ -58,11 +59,10 @@ def change_coords(img, new_coords):
 
     new_img = np.zeros_like(img)
 
-    for i in range(img.shape[0]):
-        for j in range(img.shape[1]):
-            new_img[y_new[i, j], x_new[i, j]] = img[i, j]
+    for i in range(x_new.shape[0]):
+        for j in range(x_new.shape[1]):
+            new_img[y_new[i, j], x_new[i, j]] = img[i % img.shape[0], j]
 
-    pdb.set_trace()
     return new_img
 
 
