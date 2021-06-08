@@ -5,15 +5,11 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{amssymb}
-\usepackage{alltt}
 \usepackage{enumitem}
 \usepackage{siunitx}
 \usepackage{physics}
 \usepackage{float}
-\usepackage{tcolorbox}
-\usepackage{relsize}
-\usepackage{mathtools}
-\usepackage{hyperref}
+\usepackage{booktabs}
 
 \setlength{\parindent}{0pt}
 \renewcommand{\arraystretch}{1.7}
@@ -27,7 +23,7 @@
 \begin{table}[h]
     \centering
     \begin{tabular}{ll}
-        \hline \hline
+        \toprule
         Complex number (standard form)
         & $a + bi$
         \\
@@ -42,6 +38,7 @@
         r_1r_2(\cos(\theta_1\theta_2) + i\sin(\theta_1\theta_2))$ \\
         & \textit{multiply the lengths, add the angles}
         \\
+        \midrule
         Complex exponent
         & $e^{a + bi} = e^{a}e^{bi}$ \\
         & \textit{length $= e^{a}$, angle $= b$}
@@ -49,7 +46,7 @@
         Complex log
         & $\ln(re^{i\theta}) = \ln(r) + i\theta \qquad (+ 2\pi ki)$
         \\
-        \hline \hline
+        \bottomrule
     \end{tabular}
 \end{table}
 
