@@ -34,9 +34,9 @@ def transform(z, r1, r2):
     annulus *= beta
 
     # h_disp = np.log(r2 / r1) - 1j * np.sin(alpha) * np.log(r2 / r1)
-    h_disp = np.log(r2 / r1) - (np.tan(alpha) * np.log(
-        r2 / r1) * np.sin(alpha)) + (1j * np.sin(alpha) * np.log(r2 / r1))
-    v_disp = -2j * np.pi
+    h_disp = np.log(r2 / r1) - (np.tan(alpha) * np.log(r2 / r1) *
+                                np.sin(alpha)) + (1j * np.sin(alpha) * np.log(r2 / r1))
+    # v_disp = -2j * np.pi
     annulus = np.concatenate((
         annulus - h_disp,
         annulus,
